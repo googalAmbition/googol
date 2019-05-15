@@ -2,6 +2,8 @@ package org.ctc.googol.jackson.version2;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
 
+import java.util.List;
+
 import lombok.Data;
 import lombok.ToString;
 
@@ -17,5 +19,9 @@ public class StartEvent extends BaseElement {
   private String startEvent;
 
   private String startInfo;
+
+  private Boolean isSuccess;
+
+  private List<String> list;
 
 }
