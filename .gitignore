@@ -1,2 +1,4 @@
 /.idea
 /googol.iml
+/*/target
+/*/*.iml
