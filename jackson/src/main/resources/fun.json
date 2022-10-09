@@ -1,0 +1,87 @@
+[
+  {
+    "targetType": 100,
+    "newValue": 9956.0,
+    "oldValue": 11154.0
+  },
+  {
+    "targetType": 200,
+    "newValue": 0.9887505022097228,
+    "oldValue": 0.9878070647301417
+  },
+  {
+    "targetType": 201,
+    "newValue": 1.0,
+    "oldValue": 1.0
+  },
+  {
+    "targetType": 202,
+    "newValue": 0.9887505022097228,
+    "oldValue": 0.9878070647301417
+  },
+  {
+    "targetType": 300,
+    "newValue": 0.06735067045916295,
+    "oldValue": 0.15147939734979124
+  },
+  {
+    "targetType": 301,
+    "newValue": 86.45289626746542,
+    "oldValue": 91.38018926979848
+  },
+  {
+    "targetType": 302,
+    "newValue": 5.316274963273872,
+    "oldValue": 6.1561537332619185
+  },
+  {
+    "targetType": 303,
+    "newValue": 0.017121921024161862,
+    "oldValue": 0.01573038532617134
+  },
+  {
+    "targetType": 304,
+    "newValue": 0.45533953455412624,
+    "oldValue": 0.41191284532587885
+  },
+  {
+    "targetType": 400,
+    "newValue": 0.018448079117535186,
+    "oldValue": 0.012181052649391039
+  },
+  {
+    "targetType": 500,
+    "newValue": 0.009924603785197723,
+    "oldValue": 0.008186148045247072
+  },
+  {
+    "targetType": 501,
+    "newValue": 0.016233266656408677,
+    "oldValue": 0.016421909108950188
+  },
+  {
+    "targetType": 502,
+    "newValue": 0.6113744075829384,
+    "oldValue": 0.4984894259818731
+  },
+  {
+    "targetType": 600,
+    "newValue": 0.34108527131782945,
+    "oldValue": 0.3575757575757576
+  },
+  {
+    "targetType": 700,
+    "newValue": 6.6154466E7,
+    "oldValue": 1.03139113E8
+  },
+  {
+    "targetType": 800,
+    "reasons": [
+      {
+        "appId": 12,
+        "oldValue": "30",
+        "newValue": "50"
+      }
+    ]
+  }
+]

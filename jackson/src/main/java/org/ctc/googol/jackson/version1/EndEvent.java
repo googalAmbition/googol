@@ -9,8 +9,8 @@ import lombok.ToString;
  */
 @ToString(callSuper = true)
 @Data
-public class EndEvent extends BaseElement{
+public class EndEvent extends BaseElement {
 
-  private String endEvent;
-  private String endInfo;
+    private String endEvent;
+    private String endInfo;
 }

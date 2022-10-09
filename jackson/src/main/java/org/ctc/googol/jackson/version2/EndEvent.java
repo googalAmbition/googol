@@ -1,7 +1,6 @@
 package org.ctc.googol.jackson.version2;
 
 import com.fasterxml.jackson.annotation.JsonTypeName;
-
 import lombok.Data;
 import lombok.ToString;
 
@@ -14,6 +13,6 @@ import lombok.ToString;
 @JsonTypeName(value = "endEvent")
 public class EndEvent extends BaseElement {
 
-  private String endEvent;
-  private String endInfo;
+    private String endEvent;
+    private String endInfo;
 }
