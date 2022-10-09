@@ -2,3 +2,5 @@
 /googol.iml
 /*/target
 /*/*.iml
+*.iml
+.gradle
