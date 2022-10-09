@@ -4,7 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.Getter;
-import org.junit.Test;
 
 /**
  * @author ctc on 2019/4/13
@@ -13,23 +12,22 @@ import org.junit.Test;
 @Builder
 public class Message {
 
-  private String name;
+    private String name;
 
-  private String content;
+    private String content;
 
-  private Type type;
+    private Type type;
 
-  @AllArgsConstructor
-  public enum Type {
-    CREATE(1, "create data"),
-    READ(1, "read data"),
-    UPDATE(1, "update"),
-    DELETE(1, "delete data");
+    @AllArgsConstructor
+    public enum Type {
+        CREATE(1, "create data"),
+        READ(1, "read data"),
+        UPDATE(1, "update"),
+        DELETE(1, "delete data");
 
-    @Getter
-    private Integer value;
-    @Getter
-    private String describe;
-
-  }
+        @Getter
+        private Integer value;
+        @Getter
+        private String describe;
+    }
 }

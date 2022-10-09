@@ -9,17 +9,17 @@ import java.text.MessageFormat;
  */
 public class Subscriber {
 
-  @Subscribe
-  public void create(Message message) {
-    if (Message.Type.CREATE.equals(message.getType())) {
-      System.out.println(MessageFormat.format("the create  message is {0}", message));
+    @Subscribe
+    public void create(Message message) {
+        if (Message.Type.CREATE.equals(message.getType())) {
+            System.out.println(MessageFormat.format("the create  message is {0}", message));
+        }
     }
-  }
 
-  @Subscribe
-  public void update(Message message) {
-    if (Message.Type.UPDATE.equals(message.getType())) {
-      System.out.println(MessageFormat.format("the update  message is {0}", message));
+    @Subscribe
+    public void update(Message message) {
+        if (Message.Type.UPDATE.equals(message.getType())) {
+            System.out.println(MessageFormat.format("the update  message is {0}", message));
+        }
     }
-  }
 }

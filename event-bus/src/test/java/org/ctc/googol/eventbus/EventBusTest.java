@@ -8,7 +8,7 @@ import org.junit.Test;
 public class EventBusTest {
 
     @Test
-    public void test1(){
+    public void test1() {
         EventBus.getDefault().register(new subscribe());
         Event event = new Event();
         event.setMessage("hello world");
@@ -16,20 +16,16 @@ public class EventBusTest {
     }
 
     @Data
-    public static class Event{
-        private String message;
+    public static class Event {
 
+        private String message;
     }
 
     public class subscribe {
 
         @Subscribe
-        public void process(Event event){
+        public void process(Event event) {
             System.out.println(event);
         }
-
     }
-
-
-
 }

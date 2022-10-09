@@ -7,16 +7,15 @@ import org.greenrobot.eventbus.EventBus;
  */
 public class Dispatcher {
 
-  private EventBus eventBus = new EventBus();
+    private EventBus eventBus = new EventBus();
 
-  private Subscriber subscriber = new Subscriber();
+    private Subscriber subscriber = new Subscriber();
 
-  {
-    eventBus.register(subscriber);
-  }
+    {
+        eventBus.register(subscriber);
+    }
 
-  public void dispatcher(Message message) {
-    eventBus.post(message);
-  }
-
+    public void dispatcher(Message message) {
+        eventBus.post(message);
+    }
 }
