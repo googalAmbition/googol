@@ -1,4 +1,4 @@
-package org.ctc.googol.javabase.set;
+package com.tcoding.demo.base;
 
 import org.junit.Assert;
 import org.junit.Before;
@@ -31,5 +31,10 @@ public class SetContainsTest {
     public void containAllTest() {
         Assert.assertTrue(
             setA.containsAll(setB));
+    }
+
+    @Test
+    public void boolTest(){
+        System.out.println(Boolean.valueOf(null));
     }
 }

@@ -16,6 +16,9 @@
         <module>spi-demo/java_spi_demo</module>
         <module>spi-demo/dubbo_spi_demo</module>
         <module>rules-engine</module>
+        <module>thrift</module>
+        <module>grpc</module>
+        <module>netty</module>
     </modules>
 
     <dependencies>
@@ -36,6 +39,7 @@
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-compiler-plugin</artifactId>
+                <version>3.7.0</version>
                 <configuration>
                     <source>11</source>
                     <target>11</target>
