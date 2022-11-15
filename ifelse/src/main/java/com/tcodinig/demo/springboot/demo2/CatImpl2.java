@@ -6,7 +6,7 @@ import org.springframework.stereotype.Service;
  * @author 陈天成
  * @date 2022/11/15.
  */
-@Service
+@Service("cat")
 public class CatImpl2 implements IAnimal {
 
     @Override

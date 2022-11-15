@@ -12,23 +12,23 @@ import javax.annotation.Resource;
 public class AnimalService {
 
     @Resource
-    private CatImpl cat;
+    private CatImpl catImpl;
 
     @Resource
-    private DogImpl dog;
+    private DogImpl dogImpl;
 
     @Resource
-    private PigImpl pig;
+    private PigImpl pigImpl;
 
     public void toName(String code) {
         if ("pig".equals(code)) {
-            pig.name();
+            pigImpl.name();
         } else if ("dog".equals(code)) {
-            dog.name();
+            dogImpl.name();
         } else if ("cat".equals(code)) {
-            cat.name();
+            catImpl.name();
         } else {
-            //
+            // default
         }
     }
 }

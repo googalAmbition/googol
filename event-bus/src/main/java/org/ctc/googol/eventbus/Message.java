@@ -26,7 +26,7 @@ public class Message {
         DELETE(1, "delete data");
 
         @Getter
-        private Integer value;
+        private int value;
         @Getter
         private String describe;
     }
