@@ -10,3 +10,4 @@
 |spi|java spi和dubbo spi使用|完成|
 |thrift|thrift通信|完成|
 |grpc|grpc通信|完成|
+|if else|if-else替换方案|完成|

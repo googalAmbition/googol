@@ -13,9 +13,8 @@ public class AssertDemoTest {
 
     @Test
     public void assertDemo() {
-        AssertDemo assertDemo = new AssertDemo();
         IntStream.range(0, 10).forEach(x -> {
-            int random = assertDemo.random();
+            int random = new Random().nextInt(10);
             assert random > 5 : "random must > 5";
             System.out.println("success");
         });

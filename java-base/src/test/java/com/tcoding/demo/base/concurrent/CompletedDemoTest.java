@@ -1,15 +1,19 @@
 package com.tcoding.demo.base.concurrent;
 
+import org.junit.Assert;
 import org.junit.Test;
 
 import java.util.List;
 import java.util.Random;
 import java.util.concurrent.CompletableFuture;
+import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
+import java.util.concurrent.Future;
 import java.util.concurrent.TimeUnit;
 import java.util.stream.Collectors;
 import java.util.stream.IntStream;
+import java.util.stream.Stream;
 
 /**
  * @author 陈天成
@@ -101,5 +105,143 @@ public class CompletedDemoTest {
         CompletableFuture.allOf(collect.toArray(new CompletableFuture[] {})).join();
         System.out.println("最终耗时" + (System.currentTimeMillis() - begin) + "毫秒");
         executorService.shutdown();
+    }
+
+    public Future<String> calculateAsync() {
+        CompletableFuture<String> completableFuture = new CompletableFuture<>();
+        Executors.newCachedThreadPool().submit(() -> {
+            Thread.sleep(500);
+            completableFuture.complete("Hello");
+            return null;
+        });
+        return completableFuture;
+    }
+
+    @Test
+    public void get() throws ExecutionException, InterruptedException {
+        Future<String> future = calculateAsync();
+        String s = future.get();
+        Assert.assertEquals("Hello", s);
+    }
+
+    @Test
+    public void supplyAsync() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> future = CompletableFuture.supplyAsync(() -> "Hello");
+        Assert.assertEquals("Hello", future.get());
+    }
+
+    @Test
+    public void thenApply() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> completableFuture
+            = CompletableFuture.supplyAsync(() -> "Hello");
+
+        CompletableFuture<String> future = completableFuture
+            .thenApply(s -> s + " World");
+        Assert.assertEquals("Hello World", future.get());
+    }
+
+    @Test
+    public void thenAccept() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> completableFuture
+            = CompletableFuture.supplyAsync(() -> "Hello");
+
+        CompletableFuture<Void> future = completableFuture
+            .thenAccept(s -> System.out.println("Computation returned: " + s));
+
+        future.get();
+    }
+
+    @Test
+    public void thenRun() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> completableFuture
+            = CompletableFuture.supplyAsync(() -> "Hello");
+
+        CompletableFuture<Void> future = completableFuture
+            .thenRun(() -> System.out.println("Computation finished."));
+
+        future.get();
+    }
+
+    @Test
+    public void thenCompose() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> completableFuture
+            = CompletableFuture.supplyAsync(() -> "Hello")
+            .thenCompose(s -> CompletableFuture.supplyAsync(() -> s + " World"));
+
+        Assert.assertEquals("Hello World", completableFuture.get());
+    }
+
+    @Test
+    public void thenCombine() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> completableFuture
+            = CompletableFuture.supplyAsync(() -> "Hello")
+            .thenCombine(CompletableFuture.supplyAsync(() -> " World"), (s1, s2) -> s1 + s2);
+
+        Assert.assertEquals("Hello World", completableFuture.get());
+    }
+
+    @Test
+    public void thenAcceptBoth() {
+        CompletableFuture.supplyAsync(() -> "Hello")
+            .thenAcceptBoth(CompletableFuture.supplyAsync(() -> " World"),
+                (s1, s2) -> System.out.println(s1 + s2));
+    }
+
+    @Test
+    public void allOf() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> future1
+            = CompletableFuture.supplyAsync(() -> "Hello");
+        CompletableFuture<String> future2
+            = CompletableFuture.supplyAsync(() -> "Beautiful");
+        CompletableFuture<String> future3
+            = CompletableFuture.supplyAsync(() -> "World");
+
+        CompletableFuture<Void> combinedFuture
+            = CompletableFuture.allOf(future1, future2, future3);
+
+        // ...
+
+        combinedFuture.get();
+
+        Assert.assertTrue(future1.isDone());
+        Assert.assertTrue(future2.isDone());
+        Assert.assertTrue(future3.isDone());
+
+        String combined = Stream.of(future1, future2, future3)
+            .map(CompletableFuture::join)
+            .collect(Collectors.joining(" "));
+
+        Assert.assertEquals("Hello Beautiful World", combined);
+    }
+
+    @Test
+    public void handle() throws ExecutionException, InterruptedException {
+        String name = null;
+
+        // ...
+
+        CompletableFuture<String> completableFuture
+            = CompletableFuture.supplyAsync(() -> {
+            if (name == null) {
+                throw new RuntimeException("Computation error!");
+            }
+            return "Hello, " + name;
+        }).handle((s, t) -> s != null ? s : "Hello, Stranger!");
+
+        Assert.assertEquals("Hello, Stranger!", completableFuture.get());
+
+        completableFuture.completeExceptionally( new RuntimeException("Calculation failed!"));
+        completableFuture.get(); // ExecutionException
+    }
+
+    @Test
+    public void thenApplyAsync() throws ExecutionException, InterruptedException {
+        CompletableFuture<String> completableFuture
+            = CompletableFuture.supplyAsync(() -> "Hello");
+
+        CompletableFuture<String> future = completableFuture
+            .thenApplyAsync(s -> s + " World");
+
+        Assert.assertEquals("Hello World", future.get());
     }
 }

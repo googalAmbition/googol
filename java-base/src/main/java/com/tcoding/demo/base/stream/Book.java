@@ -73,6 +73,7 @@ public class Book {
          */
         @Override
         public Supplier<Table<Integer, Integer, List<Group.BookInfo>>> supplier() {
+            System.out.println("supplier");
             return HashBasedTable::create;
         }
 
@@ -81,7 +82,9 @@ public class Book {
          */
         @Override
         public BiConsumer<Table<Integer, Integer, List<Group.BookInfo>>, Book> accumulator() {
+            System.out.println("accumulator");
             return (table, book) -> {
+                System.out.println("accumulator-->BiConsumer");
                 List<Group.BookInfo> books = table.get(book.getCategory(), book.getLevel());
                 if (books == null) {
                     books = new ArrayList<>();
@@ -100,8 +103,10 @@ public class Book {
          */
         @Override
         public BinaryOperator<Table<Integer, Integer, List<Group.BookInfo>>> combiner() {
-            return (a, b) ->
-                Stream.concat(a.cellSet().stream(), b.cellSet().stream())
+            System.out.println("combiner");
+            return (a, b) -> {
+                System.out.println("combiner-->BinaryOperator");
+                return Stream.concat(a.cellSet().stream(), b.cellSet().stream())
                     .collect(Tables.toTable(Table.Cell::getRowKey,
                         Table.Cell::getColumnKey,
                         Table.Cell::getValue,
@@ -109,6 +114,7 @@ public class Book {
                             x.addAll(y);
                             return x;
                         }, HashBasedTable::create));
+            };
         }
 
         /**
@@ -116,7 +122,9 @@ public class Book {
          */
         @Override
         public Function<Table<Integer, Integer, List<Group.BookInfo>>, Map<Integer, List<Group>>> finisher() {
+            System.out.println("finisher");
             return (table) -> {
+                System.out.println("finisher-->Function");
                 Map<Integer, List<Group>> result = new HashMap<>();
                 table.columnMap().forEach((key, value) -> {
                     List<Group> groups = value.entrySet().stream()
@@ -134,6 +142,7 @@ public class Book {
 
         @Override
         public Set<Characteristics> characteristics() {
+            System.out.println("characteristics");
             return EnumSet.of(Characteristics.CONCURRENT);
         }
     }
